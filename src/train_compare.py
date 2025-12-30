@@ -50,16 +50,21 @@ def load_and_prepare_data(data_path: str):
     # Vectorize descriptions using TF-IDF
     tfidf_vectorizer = None
     if descriptions is not None:
+        # Using TF-IDF to extract features from descriptions
+        # Note: sklearn only supports 'english' for stop_words parameter
         tfidf_vectorizer = TfidfVectorizer(max_features=20, stop_words=None)
         tfidf_features = tfidf_vectorizer.fit_transform(descriptions).toarray()
         
         # Combine categorical/numeric features with TF-IDF features
         X_combined = np.hstack([X_categorical.values, tfidf_features])
+        
+        print(f"Data loaded: {len(df)} samples, {X_combined.shape[1]} features")
+        print(f"Features: {list(X_categorical.columns)} + TF-IDF({tfidf_features.shape[1]} features)")
     else:
         X_combined = X_categorical.values
+        print(f"Data loaded: {len(df)} samples, {X_combined.shape[1]} features")
+        print(f"Features: {list(X_categorical.columns)}")
     
-    print(f"Data loaded: {len(df)} samples, {X_combined.shape[1]} features")
-    print(f"Features: {list(X_categorical.columns)} + TF-IDF({tfidf_features.shape[1]} features)")
     print(f"Target classes: {sorted(y.unique())}")
     
     return X_combined, y.values, label_encoders, tfidf_vectorizer
