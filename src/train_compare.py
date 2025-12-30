@@ -5,10 +5,11 @@ Trains DecisionTree and RandomForest models, compares them, and saves the best o
 
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder
+import pickle
 import os
 import sys
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
 
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -121,7 +122,6 @@ def train_and_compare(data_path: str, model_output_dir: str):
     print(f"\nBest model saved to: {best_model_path}")
     
     # Also save label encoders for later use
-    import pickle
     encoders_path = os.path.join(model_output_dir, 'label_encoders.pkl')
     with open(encoders_path, 'wb') as f:
         pickle.dump(label_encoders, f)

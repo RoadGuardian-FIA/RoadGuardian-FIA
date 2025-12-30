@@ -100,7 +100,11 @@ def load_rules():
 
 @app.on_event("startup")
 async def startup_event():
-    """Initialize the application on startup"""
+    """
+    Initialize the application on startup
+    Note: Using @app.on_event("startup") for broader compatibility.
+    For FastAPI 0.109+, consider migrating to lifespan context manager.
+    """
     try:
         load_model()
         load_rules()

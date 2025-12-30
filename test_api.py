@@ -44,7 +44,8 @@ def test_endpoint(name, method, endpoint, data=None):
     try:
         json_data = response.json()
         print(json.dumps(json_data, indent=2, ensure_ascii=False))
-    except:
+    except (json.JSONDecodeError, ValueError) as e:
+        print(f"Could not parse JSON response: {e}")
         print(response.text)
     
     return response.status_code == 200
