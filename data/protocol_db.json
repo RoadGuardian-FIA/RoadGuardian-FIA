@@ -1,0 +1,59 @@
+{
+  "EMERGENZA_CRITICA": {
+    "guidelines": [
+      "Arrestare il veicolo immediatamente in zona sicura",
+      "Attivare le quattro frecce d'emergenza",
+      "Non avvicinarsi al luogo dell'incidente",
+      "Chiamare i servizi di soccorso (112)",
+      "Attendere istruzioni dalle autorità",
+      "Lasciare libero il corridoio di emergenza per le ambulanze"
+    ]
+  },
+  "ARRESTO_OBBLIGATORIO": {
+    "guidelines": [
+      "Ridurre gradualmente la velocità",
+      "Prepararsi all'arresto completo",
+      "Non oltrepassare la linea di arresto",
+      "Verificare lo stato del semaforo o delle barriere",
+      "Spegnere il motore se l'attesa è prolungata (es. treno)"
+    ]
+  },
+  "GESTIONE_SINISTRO": {
+    "guidelines": [
+      "Ridurre la velocità sotto i 30 km/h",
+      "Attivare le luci di emergenza per segnalare la coda",
+      "Mantenere la distanza di sicurezza aumentata",
+      "Prestare attenzione a detriti sulla carreggiata",
+      "Non distrarsi guardando l'incidente (no rubbernecking)",
+      "Seguire le deviazioni della polizia se presenti"
+    ]
+  },
+  "ZONA_RESIDENZIALE_CRITICA": {
+    "guidelines": [
+      "Mantenere il piede pronto sul freno",
+      "Rispettare rigorosamente i limiti di velocità vigenti",
+      "Scansionare attivamente i lati della strada (marciapiedi)",
+      "Dare sempre la precedenza ai pedoni",
+      "Procedere a passo d'uomo in presenza di dossi",
+      "Fare attenzione a bambini o animali improvvisi"
+    ]
+  },
+  "PRUDENZA_INTERSEZIONE": {
+    "guidelines": [
+      "Rallentare in prossimità dell'intersezione",
+      "Utilizzare sempre gli indicatori di direzione per segnalare manovre",
+      "Controllare i flussi di traffico da destra e sinistra",
+      "Verificare gli angoli ciechi prima di svoltare",
+      "Non bloccare l'incrocio in caso di traffico intenso"
+    ]
+  },
+  "GUIDA_NOTTURNA_EXTRAURBANA": {
+    "guidelines": [
+      "Rispettare i limiti di velocità e mantenere la destra",
+      "Raddoppiare la distanza di sicurezza",
+      "Utilizzare abbaglianti se non si incrociano veicoli",
+      "Prestare attenzione alla segnaletica riflettente",
+      "Fermarsi al primo segno di stanchezza"
+    ]
+  }
+}
