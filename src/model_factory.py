@@ -114,10 +114,18 @@ class ModelBase:
             self.model = pickle.load(f)
 
 
+pesi_classi_incidenti = {
+    'EMERGENZA_CRITICA': 100.0,           # Codice Rosso: feriti gravi/incendio. Errore fatale.
+    'ARRESTO_OBBLIGATORIO': 85.0,        # Strada bloccata: rischio di tamponamento a catena.
+    'GESTIONE_SINISTRO': 60.0,           # Protocollo standard: veicoli fermi ma area delimitata.
+    'ZONA_RESIDENZIALE_CRITICA': 50.0,   # Incidente con rischio pedoni/folla sul luogo.
+    'PRUDENZA_INTERSEZIONE': 45.0,       # Incidente in incrocio: gestione flussi trasversali.
+    'GUIDA_NOTTURNA_EXTRAURBANA': 30.0    # Incidente in zone buie: rischio visibilità per chi sopraggiunge.
+}
 class DecisionTreeModel(ModelBase):
     """Implementazione del modello Decision Tree per classificazione incidenti."""
     
-    def __init__(self, max_depth: int = 10, random_state: int = 42, class_weight: str = None):
+    def __init__(self, max_depth: int = 10, random_state: int = 42, class_weight: dict = pesi_classi_incidenti):
         """
         Scopo: Inizializza un classificatore Decision Tree con parametri configurabili.
 
@@ -144,7 +152,7 @@ class DecisionTreeModel(ModelBase):
 class RandomForestModel(ModelBase):
     """Implementazione del modello Random Forest per classificazione incidenti."""
     
-    def __init__(self, n_estimators: int = 100, max_depth: int = 10, random_state: int = 42, class_weight: str = None):
+    def __init__(self, n_estimators: int = 100, max_depth: int = 10, random_state: int = 42, class_weight: dict = pesi_classi_incidenti):
         """
         Scopo: Inizializza un classificatore Random Forest con parametri configurabili.
 
