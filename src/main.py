@@ -6,6 +6,7 @@ dei protocolli di sicurezza utilizzando un modello ML addestrato.
 """
 
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 from typing import Dict, List, Optional
 import json
@@ -13,11 +14,25 @@ import os
 import pickle
 import numpy as np
 
-# Inizializzazione dell'applicazione FastAPI
+
+class UnicodeJSONResponse(JSONResponse):
+    """Risposta JSON che preserva i caratteri Unicode (es. accenti)."""
+    def render(self, content) -> bytes:
+        return json.dumps(
+            content,
+            ensure_ascii=False,
+            allow_nan=False,
+            indent=None,
+            separators=(",", ":"),
+        ).encode("utf-8")
+
+
+# Inizializzazione dell'applicazione FastAPI con risposta UTF-8
 app = FastAPI(
     title="RG Behavioral Guidelines AI",
     description="API per la classificazione degli incidenti e il recupero dei protocolli di sicurezza (ML-Based)",
-    version="2.1.0"
+    version="2.1.0",
+    default_response_class=UnicodeJSONResponse
 )
 
 # Variabile globale per il database dei protocolli (caricato all'avvio)
@@ -182,12 +197,22 @@ def prepare_features(data: IncidentInput) -> np.ndarray:
             if value is None:
                 value = 'Unknown'
             
+            # Normalizzazione case-sensitive per matching con il training set
+            # Severity e Road_Type sono lowercase nel training
+            # Incident_Type ha maiuscola iniziale (es. "Tamponamento")
+            if col in ['Severity', 'Road_Type']:
+                value_normalized = str(value).lower()
+            else:
+                # Per Incident_Type, capitalizza la prima lettera di ogni parola
+                value_normalized = str(value).title()
+            
             # Applica LabelEncoder
             if col in LABEL_ENCODERS:
                 try:
-                    encoded = LABEL_ENCODERS[col].transform([str(value)])[0]
+                    encoded = LABEL_ENCODERS[col].transform([value_normalized])[0]
                 except ValueError:
                     # Valore non visto durante training, usa valore più comune (0)
+                    print(f"[WARNING] Valore '{value_normalized}' non riconosciuto per colonna '{col}', uso fallback")
                     encoded = 0
                 features.append(encoded)
             else:
@@ -360,4 +385,4 @@ async def predict_protocol(incident: IncidentInput):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8001)
