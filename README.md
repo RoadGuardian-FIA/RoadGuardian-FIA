@@ -126,7 +126,7 @@ Avvia il server FastAPI:
 python src/main.py
 ```
 
-L'API sarà disponibile su `http://localhost:8000`.
+L'API sarà disponibile su `http://localhost:8001`.
 
 ### 3. Test dell'API
 
@@ -184,8 +184,8 @@ python test_api.py
 
 Con l'API in esecuzione, accedi a:
 
-- **Swagger UI:** <http://localhost:8000/docs>
-- **ReDoc:** <http://localhost:8000/redoc>
+- **Swagger UI:** <http://localhost:8001/docs>
+- **ReDoc:** <http://localhost:8001/redoc>
 
 ## Verifica Dataset
 
