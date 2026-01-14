@@ -226,24 +226,6 @@ def prepare_features(data: IncidentInput) -> np.ndarray:
     return np.array(features).reshape(1, -1)
 
 
-def classify_incident_ml(data: IncidentInput) -> str:
-    """
-    Scopo: Classifica l'incidente usando il modello ML addestrato.
-
-    Parametri:
-    - data (IncidentInput): Dati dell'incidente validati da Pydantic.
-
-    Valore di ritorno:
-    - str: Etichetta della classe predetta dal modello.
-
-    Eccezioni:
-    - Exception: Eventuali errori propagati dalla predizione.
-    """
-    X = prepare_features(data)
-    prediction = ML_MODEL.predict(X)
-    return prediction[0]
-
-
 def classify_incident(data: IncidentInput) -> str:
     """
     Scopo: Classifica l'incidente usando il modello ML addestrato.
@@ -260,8 +242,10 @@ def classify_incident(data: IncidentInput) -> str:
     """
     if ML_MODEL is None:
         raise RuntimeError("Modello ML non caricato. Eseguire load_model() all'avvio.")
-    
-    return classify_incident_ml(data)
+   
+    X = prepare_features(data)
+    prediction = ML_MODEL.predict(X)
+    return prediction[0]
 
 
 # --- Endpoint API ---
@@ -385,4 +369,4 @@ async def predict_protocol(incident: IncidentInput):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    uvicorn.run(app, host="0.0.0.0", port=8001  )
