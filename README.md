@@ -19,6 +19,11 @@ RG-Linee_Guida_Comportamentali_AI/
 ├── data/
 │   ├── dataset.csv             # Dataset con feature e Target_Label
 │   └── protocol_db.json        # Database testuale delle Linee Guida
+├── data-preparation_tools/
+│   ├── dataset_balancer.py              # Script per il bilanciamento del dataset (3)
+|   ├── dataset_feature_engineering.py   # Script per il feature engineering del dataset (1)
+│   └── dataset_labeler.py               # Script per l'etichettatura del dataset (2)
+|
 ├── models/
 │   ├── best_model.pkl          # Modello ML addestrato (RandomForest/DecisionTree)
 │   ├── label_encoders.pkl      # Encoder per feature categoriche
@@ -95,6 +100,9 @@ Il classificatore lavora sulle seguenti feature in ingresso:
 ```bash
 pip install -r requirements.txt
 ```
+## Data Preparation (non necessaria)
+In questa fase sono previsti tutti gli step di data preparation richiesti per trasformare il dataset (https://www.kaggle.com/datasets/sobhanmoosavi/us-accidents)[US Accidents]. 
+Questi passi non devono essere eseguiti perchè nella cartella 'data' è presente già il dataset di input al modello ossia: dataset.csv.
 
 ## Utilizzo
 
